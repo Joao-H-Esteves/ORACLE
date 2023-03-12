@@ -71,3 +71,22 @@ SELECT SOMADA.EMBALAGEM , SOMADA.SOMA FROM
 GROUP BY EMBALAGEM) SOMADA
 WHERE
 SOMADA.SOMA >80;
+
+-------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+SELECT INF.CODIGO_DO_PRODUTO, TP.NOME_DO_PRODUTO, SUM(INF.QUANTIDADE) FROM ITENS_NOTAS_FISCAIS INF
+INNER JOIN TABELA_DE_PRODUTOS TP 
+ON INF.CODIGO_DO_PRODUTO = TP.CODIGO_DO_PRODUTO
+GROUP BY INF.CODIGO_DO_PRODUTO, TP.NOME_DO_PRODUTO HAVING SUM(INF.QUANTIDADE) > 394000 
+ORDER BY SUM(INF.QUANTIDADE) DESC;
+
+--Redesenhe esta consulta usando subconsultas.
+
+SELECT * FROM 
+(select inf.codigo_do_produto , sum(inf.quantidade) from ITENS_NOTAS_FISCAIS  inf
+group by inf.codigo_do_produto) as soma , TABELA_DE_PRODUTOS TB
+WHERE TB.codigo_do_produto = inf.codigo_do_produto
+; -- NÃO SEI FAZER
+
+
