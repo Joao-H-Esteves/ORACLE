@@ -150,3 +150,24 @@ INNER JOIN ITENS_NOTAS_FISCAIS INF
     ON INF.NUMERO = NF.NUMERO
 WHERE TO_CHAR(DATA_VENDA,'YYYY') = 2016
 GROUP BY TO_CHAR(DATA_VENDA,'YYYY');
+
+----------------------------------------------------------------------------------------
+/*Queremos construir um SQL cujo resultado seja, para cada cliente:
+
+O cliente NOME DO CLIENTE faturou QUANTIDADE no ano de ANO
+Faça isso somente para o ano de 2016.*/
+
+SELECT 'O cliente ' || TABCLI.NOME || ' faturou R$ '|| 
+ROUND(SUM( ITNF.QUANTIDADE * ITNF.PRECO),2) ||' no ano de ' || 
+TO_CHAR(NFS.DATA_VENDA,'YYYY') as SENTENÇA
+
+FROM
+TABELA_DE_CLIENTES TABCLI
+INNER JOIN 
+NOTAS_FISCAIS NFS
+ON NFS.CPF = TABCLI.CPF
+INNER JOIN 
+ITENS_NOTAS_FISCAIS ITNF
+ON ITNF.NUMERO = NFS.NUMERO
+WHERE TO_CHAR(NFS.DATA_VENDA,'YYYY') = '2016'
+GROUP BY TABCLI.NOME , TO_CHAR(NFS.DATA_VENDA,'YYYY');
