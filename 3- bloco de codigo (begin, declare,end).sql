@@ -1,0 +1,59 @@
+
+-- inserindo linhas FORMA CONVENCIONAL
+
+insert into SEGMERCADO (ID, DESCRICAO) VALUES
+(10000,'VAREJO');
+
+-- inserindo usando BLOCOS DE COMANDO
+
+DECLARE
+    --criando as variaveis
+    V_ID NUMBER (5) := 10002;
+    V_DESCRICAO VARCHAR2 (100):= 'Industria';
+BEGIN
+    -- inicializando o programa (nesse caso fazer insert das variavies em uma tabela)
+    INSERT INTO SEGMERCADO (ID, DESCRICAO) VALUES (V_ID , V_DESCRICAO);
+    COMMIT ;
+    -- COMO É UMA INSERÇÃO TEMOS QUE ADICIONAR O COMMIT
+END;
+
+SELECT * FROM SEGMERCADO;
+
+----------------------------------------
+
+DECLARE 
+
+    v_COD	VARCHAR2(5):= 41232;
+    v_DESCRICAO	VARCHAR2(100) := 'Sabor de Verão - Laranja - 1 Litro';
+    v_CATEGORIA	VARCHAR2(100):= 'Sucos de Frutas';
+BEGIN
+    INSERT INTO PRODUTO_EXERCICIO ( COD, DESCRICAO, CATEGORIA) VALUES (v_COD, v_DESCRICAO, v_CATEGORIA);
+    COMMIT;
+END;    
+-----------------
+DECLARE
+v_COD       PRODUTO_EXERCICIO.COD%TYPE := 32223;
+v_DESCRICAO PRODUTO_EXERCICIO.DESCRICAO%TYPE := 'Sabor de Verão - Uva - 1 Litro';
+v_CATEGORIA PRODUTO_EXERCICIO.CATEGORIA%TYPE := 'Sucos de Frutas';
+BEGIN
+INSERT INTO PRODUTO_EXERCICIO (COD,DESCRICAO,CATEGORIA) VALUES (v_COD,v_DESCRICAO,v_CATEGORIA);
+COMMIT;
+END;
+
+
+SELECT * FROM PRODUTO_EXERCICIO;
+
+---------------------------------------
+
+-- inserindo em blocos USANDO A TABELA COMO VARIAVEL ( %TYPE)
+
+DECLARE
+v_ID SEGMERCADO.ID%TYPE := 10003 ;
+v_DESCRICAO SEGMERCADO.DESCRICAO%TYPE := 'Laboratorio';
+
+BEGIN
+
+INSERT INTO SEGMERCADO (ID, DESCRICAO) VALUES (V_ID , V_DESCRICAO);
+COMMIT;
+
+END;
